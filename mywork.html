@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="description" content="Travaux d'Emmanuel Prochasson" />
+    <meta http-equiv="Content-Language" content="en" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+	<title>About my work</title>
+  </head>
+<body>
+<p><a href="index.html">Back to home</a></p>
+
+<h1>Presentation of my work</h1>
+
+<p><i>This page is badly written, as I am not a native English speaker. I know there are a lot of spelling mistake, but I have a thesis to write. Feel free to send me comments/hate mail.</i></p>
+
+September 2006, I started a PhD on <i>Bilingual Lexicon Extraction from Comparable Corpora</i> in the TALN team of the LINA laboratory (Nantes University). I am supervised by Béatrice Daille and Emmanuel Morin. Aim of this work is to be able to extract and align common vocabulary among sets of texts in different language, all refering to a common topic. I work with English-French-Japanese documents about <i>diabetes and feeding</i>.
+
+<h2>Short introduction to parallel corpora</h2>
+
+<p>Several research has been conducted on parallel corpora, that is, sets of texts in different language <i>which are mutual translations</i>. Those texts are translated by a human translator. It is quite easy to align those documents, that means, to be able to bind every part of a  <i>source</i> document to corresponding part in the <i>translated</i> (or <i>target</i>) document). A part can be a paragraph, a sentence or even a word. This way, one can build bilingual dictionnary or more sophisticated linguistic resources. </p>
+
+<p>Using aligned parallel documents for automatic translation is very efficient and is used for example by <a href="http://www.google.com/language_tools?hl=en" title="google-translate">Google Translate</a>. This is way more efficient than just using a bilingual dictionnary and a few rules for word order in sentence. On the other hand, it sadely mainly works with English language. Indeed, whereas one can find translated text from any language to English, other pairs of translation (from any language to any language, not involving English) are pretty rare. </p>
+
+<h2>About comparable corpora</h2>
+
+<p>That is why research focused on comparable corpora. Comparable corpora are sets of multilingual documents which share common features (such as topics, date of publication, register...) but which are not mutual translation. Those common features implies that documents share a common vocabulary, which we will try to extract and align (ie : finding correspondance between those elements, between each language). The process is of course quite different from what can be done using parallel corpora. Indeed, one can not rely on element position in documents to align corresponding parts. One can not even be sure that <i>there is actually a corresponding part</i> in other language documents.</p>
+
+<p>On the other hand, comparable corpora can be built more easily than parallel corpora. We just need to compile a set of documents all sharing given features (in my study, all documents have to talk about <i>diabetes and feeding</i> and be written by experts). Whereas it would have been quite hard to find French/Japanese translated documents about diabetes (for they are likely not to exist), independantly finding documents about diabetes in French and in Japanese is quite easy.</p>
+
+<p>The bad news is that documents in Comparable Corpora are not translations, but the good news is that documents in Comparable Corpora are not translations. Indeed, a translated documents is highly influenced by the <i>source</i> documents. Of course the structure of translated documents depends of source documents, but vocabulary used and organisation of speech too. In other word: if one has to say the exact same thing as a <i>source</i> document in its mother tongue, and has no idea of the source document, it is likely that he would write it in a totally different way, with its own word. Comparable corpora does not have those translation artefacts. They are likely to reveal linguistic phenomena that can not be seen any other way. Linguistic differences/common point between different language, but also interesting phenomenon in one given language. </p>
+
+<h2>Harvesting comparable corpora for lexicon alignment</h2>
+
+<p>Question is : ``how can we find and align common vocabulary if documents are not translations ?". There are several way to do that. None of them actually give as good result as alignement from parallel corpora, but we're working on it. For educational purpose, we'll assume that we have to kind of words in our documents :</p>
+<ul>
+<li>words we know, and we know their translations in all other languages</li>
+<li>words we don't know, and for which we are looking for translations</li>
+</ul>
+
+<p>A first idea is to compare unknow word frequencies regarding other unknow word frequencies, then look in other languages documents if we can find matching "compared frequencies" in unknow words set. Closest "compared frequencies" are likely to indicate candidate for translation relation. This is not what I'm working on but it's quite interesting (from my point of view). You can find way better and serious explanation in several Reinhard Rapp papers (look <a href="http://dblp.uni-trier.de/rec/bibtex/conf/acl/Rapp95" title="Identifying Word Translation in Non_Parallel Texts">here</a> and <a href="http://www.aclweb.org/anthology/P99-1067" title="Automatic Identification of Word Translations from Unrelated English and German Corpora.">here</a>).</p>
+
+<p>Another idea (the one I'm working on) is to compare <i>context</i> of unknow word. Indeed, if an unknown word has the same meaning in two languages (it's a translation), it is likely to be used in the same context. We assume there are no synonymous word for the vocabulary we are working on. Therefore, translation candidates are likely to share a similar context. Context are recorded in vectors (for non-computer scientist, vector is a fashion way of saying "table"). Every word appearing in a given window (<i>n</i> word before, <i>n</i> word after the word we want to characterise) is stored, with its frequency. We then assume that word sharing similar context vector are potential translations. Not that it should work on monolingual corpora and should highlight synonymous word, but I didn't have time to try it yet.</p>
+
+<p>Comparison of Context Vector is done in two step. First, we translate as many known word from one language context vectors to target language, then we compute distance between each context vector. We got several distance measure, each of them roughly reflect the similarity between vectors : the more two vectors share common words (with close frequency measures), the more they are close, the more two vectors contains uncommon words (or highly different associated frequencies), the more distant they are.</p>
+
+<p>For now, the goal of my research is to show that some kind of word are more relevant than other for context vector comparison. Indeed, some word are more semantically rich that some other (as an example, ``insulin" give more information about topic of the sentence than ``very", which is very common). Let's call them <i>rich words</i>. Rich words shoud be given more importance in distance computation: if two vectors share several rich words, they should be brought closer, whereas if two vectors contains different rich words, they should be took away.</p>
+
+<p>I spend three month working with Kyo Kageura (University of Tokyo -- Todai) and Akiko Aizawa (National Institute of Informatics, Tokyo) on transliteration in Japanese language. Transliteration are loan word which need to be adapted from one (source) language to the target language. The example of Japanese language is particularly interesting since it does not make use of the same alphabet and only share few common speech sounds with English or French. Therefore, words are slightly modified to be written/pronounces the Japanese way. The interesting thing is that, among scientific documents, transliterations represent up to 8% of Japanese vocabulary. Among this vocabulary, about 70% can be linked with French or English word in comparable corpora (that is, we can find the corresponding term -- semantically and phonetically close -- in French and English part of comparable corpus for 70% of transliterated element in Japanese corpora). This shows that this phenomenon is quite frequent and can be taken in consideration. More interesting is that the vocabulary of transliteration is quite close to corpora topics (remember: diabetes and feeding) and observation shows that it looks like <i>semantically rich</i>.</p>
+
+<p>We therefore try our idea with transliterated element and modified our processing stream to give more importance to transliterated element in the alignment process. It worked pretty well as we improve our base result up to 20% on the average. Here are some charts with one being better than others.</p>
+
+<center><img src="documents/img/graphe-lrec.png" title="see, it's increased" alt="some charts" /></center>
+
+<h2>Not really a conclusion...</h2>
+
+<p>Of course, this is a little bit more complicated that what is presented here. You are invited to read <a href="documents/lrec2008.pdf">this paper about transliteration in English/French/Japanese corpora</a> or maybe <a href="coling2008.pdf">this yet unpublished paper about what we did with those transliteration</a> (Oops, paper is not online yet as it is an anonymous submission, but don't tell). If you're not used to Computer Science/Natural Language Processing, you'll probably find it quite boring. In a few <s>weeks</s><s>months</s>years, when I'll have my thesis written, you'll see.</p>
+
+
+
+
+
+<p>I would be very glad to answer any question you'll have, for several reasons :</p>
+<ul>
+<li>It'll show me that somebody actually read this page...</li>
+<li>... until this notice</li>
+<li>my sole consolation about doing that job is that I find it exciting, I do like to talk about it</li>
+<li>someone is interested in what I'm doing, yeah ! (does not count if you work with me).</li>
+</ul>
+
+<hr />
+<p>Write me / Jabber me :</p>
+<p><img src="documents/img/email.png" alt="firstname.lastname"/><img src="documents/img/email2.png" alt="at univ-nantes.fr"/></p>
+
+<p><a href="index-en.html">Back to home</a></p>
+
+ <p>
+    <a href="http://validator.w3.org/check?uri=referer"><img
+        src="http://www.w3.org/Icons/valid-xhtml10"
+        alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
+  </p>
+
+</body>
+</html>

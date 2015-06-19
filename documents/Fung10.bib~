@@ -1,0 +1,8 @@
+@inproceedings{Fung10,
+  author = {Pascale Fung and Emmanuel Prochasson and Simon Shi},
+  title = {Trillions of Comparable Documents}, 
+  booktitle = {3rd workshop on Building and Using Comparable Corpora (BUCC'10), Language Resource and Evaluation Conference (LREC'10),
+  location = {Malta},
+  year = {2010},
+  pages = {26--34}
+}

@@ -1,0 +1,13 @@
+@InProceedings{Prochasson07a,
+ author       = {Emmanuel Prochasson and Christian Viard-Gaudin and
+                 Emmanuel Morin},
+ title        = {Language Models for Handwritten Short Message Services},
+ booktitle    = {Proceedings of the 9th International Conference on
+                 Document Analysis and Recognition (ICDAR'07),
+                 Curitiba, Brazil},
+ year         = 2007,
+ pages        = {83--87},
+ publisher    = {IEEE},
+ volume       = {1},
+ kind         = {CDICLA}
+} 

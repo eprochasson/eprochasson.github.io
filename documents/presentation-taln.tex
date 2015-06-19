@@ -1,0 +1,490 @@
+%\documentclass[11pt,red,handout]{beamer}
+%\documentclass[xcolor=pdftex,dvipsnames,table,11pt,red]{beamer}
+\documentclass[table,11pt,red]{beamer}
+% \documentclass[table,11pt,red,handout]{beamer}
+
+%\usepackage[T1]{fontenc}
+\usepackage{beamerthemesplit}
+%\usepackage{wasysym}
+%\usepackage{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{arabtex}
+\usepackage[francais]{babel}
+
+\usepackage[cjkjis]{ucs} % UNICODE et, en cas d’ambiguité chinois/jp, du japonais
+%\usepackage{arabtex}
+\usepackage[utf8x]{inputenc} % Saisie en UTF8
+\usepackage[C42,T1]{fontenc} % 2 encodages de police, C42, pour le japonais, et T1, pour le romain
+\DeclareFontSubstitution{C42}{min}{m}{n}
+% \usepackage[latin1]{inputenc}
+% \usepackage[latin2]{inputenc}
+%\usepackage[latin9]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+%\usepackage{color}
+\usepackage{xcolor}
+%\usepackage{textcomp}
+\usepackage{bera}
+%\usepackage{times}
+\usepackage{tabularx}
+% \usepackage{multicol}
+\usepackage{graphics}
+\usepackage{pgf}
+\usepackage{array}
+% \usepackage{pifont}
+% \usepackage{hyperref}
+%\usepackage{lucidaso}
+\definecolor{linacolor}{rgb}{148,0,0}
+%%% macro : pour avoir des accents quelque soit le codage des caract?es du syst?e
+%%
+% \catcode`\?\active\def ?\'{e}}\catcode`\?\active\def ?\`{e}}
+% \catcode`\?\active\def ?\`{a}}\catcode`\?\active\def ?\c{c}}
+% \catcode`\=\active\def {\`{u}}\catcode`\?\active\def ?{\ae}}
+% \catcode`\?\active\def ?\^{\i}}\catcode`\?\active\def ?\"{\i}}
+% \catcode`\=\active\def {\^{u}}\catcode`\=\active\def {\"{u}}
+% \catcode`\?\active\def ?\^{o}}\catcode`\?\active\def ?\^{e}}
+% \catcode`\?\active\def ?\"{o}}\catcode`\?\active\def ?\^{a}}
+% % \catcode`\?\active\def ?\"{O}}\catcode`\?\active\def ?\`{A}}
+% \catcode`\=\active\def {{\oe}}
+
+
+
+%\setbeamertemplate{footline}[frame number]
+
+
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+  %\useoutertheme{infolines}
+  \useoutertheme{shadow}
+  \usecolortheme{lina}
+}
+
+%
+%\usecolortheme{lina}
+%\usecolortheme{whale}
+\setbeamercolor*{frametitle}{parent=palette primary}
+\setbeamerfont{block title}{size={}}
+
+
+%\usefonttheme{boldserif}
+
+ \setbeamertemplate{footline}{%
+     \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+       leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+       \insertshorttitle\ (\insertshortauthor~-- \insertshortinstitute)%
+       \hfill p. \insertframenumber/29%\inserttotalframenumber
+     \end{beamercolorbox}%
+   }
+
+
+
+
+\setbeamertemplate{navigation symbols}{}
+%\setbeamercovered{dynamic}
+
+\logo{\includegraphics[width=0.1\textwidth]{./graphics/lina_small.png}}
+
+
+
+
+
+%  \setbeamertemplate{footline}{%
+%     \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+%       leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+%       \insertshorttitle\ (\insertshortauthor)%
+%       \hfill\insertpagenumber
+%     \end{beamercolorbox}%
+%   }
+
+% interligne de 1,5
+% \renewcommand{\baselinestretch}{1.5}
+
+
+%%% marges
+%%
+% \setlength{\hoffset}{-1cm}
+% \setlength{\voffset}{-2cm}
+% \setlength{\oddsidemargin}{2.4cm}
+% \setlength{\evensidemargin}{1.2cm}
+% \setlength{\topmargin}{0cm}
+% \setlength{\headheight}{1.5cm}
+% \setlength{\headsep}{0.5cm}
+% \setlength{\textheight}{24cm}
+% \setlength{\textwidth}{16.5cm}
+% \setlength{\marginparsep}{0.5cm}
+% \setlength{\marginparwidth}{0.5cm}
+% \setlength{\footskip}{1.6cm}
+%% saut entre les paragraphes
+\setlength{\parskip}{.5\baselineskip}
+
+\setlength\belowcaptionskip{1pt}
+\setlength\abovecaptionskip{1pt}
+
+
+%% profondeur de la table des maties
+\setcounter{tocdepth}{1}     % Dans la table des matieres
+% \setcounter{secnumdepth}{3}  % Avec un numero.
+
+\title[Points d'ancrage dans les corpus comparables]{Influence des points d'ancrage pour l'extraction de lexique bilingue à partir de corpus comparables spécialisés}
+%\subtitle{Extraction de lexique bilingue}
+\author[Prochasson, Morin]{Emmanuel Prochasson\\Emmanuel Morin}
+
+\institute[LINA]{Laboratoire d'Informatique de Nantes Atlantique }
+\date{TALN 2009}
+
+\begin{document}
+
+% slide 1 
+\frame {
+	\titlepage
+}
+% 
+% % slide 2
+
+% slide 3
+
+\frame{
+  \frametitle{Introduction}
+	\begin{itemize}
+	\item Objectif : extraire un vocabulaire commun et l'aligner automatiquement pour constituer un lexique bilingue
+	\item<2-> à partir de documents (multilingues) n'étant pas en relation de traduction
+	\item<3-> $\rightarrow$ corpus \emph{comparables}
+	\item<4-> «~\emph{Deux corpus de deux langues $l_1$ et $l_2$ sont dits comparables s'il existe une sous-partie non négligeable du vocabulaire du corpus de langue $l_1$, respectivement $l_2$, dont la traduction se trouve dans le corpus de langue $l_2$, respectivement $l_1$}~» (Déjean \& Gaussier, 2002)
+	\end{itemize}
+}
+
+\frame {
+	\frametitle{Plan}
+	\tableofcontents
+}
+
+
+
+\section{Extraction de lexique bilingue}
+
+\subsection{Corpus parallèles}
+\frame{
+	\frametitle{Corpus parallèles}
+\begin{columns}
+\begin{column}[l]{0.4\textwidth}
+	\begin{itemize}
+	\item<1-> Alignement basé sur la position et la distribution des mots dans les documents
+	\item<2-> Alignement basé sur des mots déjà connus, utilisés comme points d'ancrage pour aligner leurs voisins
+	\end{itemize}
+	\visible<2->{(Véronis, 2000)}
+\end{column}
+\begin{column}[r]{0.6\textwidth}
+\only<1-2>{\includegraphics[width=\textwidth]{./graphics/couloir-recherche.pdf}}
+\only<3->{\includegraphics[width=\textwidth]{./graphics/couloir-recherche2.pdf}}
+\end{column}
+\end{columns}
+}
+
+
+
+
+\subsection{Corpus comparables}
+\frame{
+	\frametitle{Corpus comparables}
+	\begin{itemize}
+	\item Rapp (1995) et Fung (1995) introduisent l'alignement à partir de corpus \emph{non-parallèles}
+	\item Tous deux s'appuient sur l'idée de caractériser le \emph{contexte} des mots à traduire, plutôt que des informations sur leurs positions
+	\item<2-> Fung (1995) s'appuie sur les bigrammes (hétérogénéité à gauche/à droite), Rapp (1995) s'appuie sur les voisins rencontrés dans une fenêtre de taille fixe autour du mot à traduire.
+	\end{itemize}
+	\begin{block}{Firth, 1957}<3->
+	\center
+	«~On reconnaît un mot à ses fréquentations ~»
+	\end{block}
+}
+
+\subsection{Approche directe}
+\frame{
+	\frametitle{Approche par traduction directe}
+  \begin{columns}
+  \begin{column}[l]{0.4\textwidth}
+	\begin{itemize}
+	\item<1-> \textbf{Construction de \emph{vecteurs de contexte}}
+	\item<2-> Traduction des vecteurs sources vers la langue cible
+	\item<3-> Calcul de la similarité entre vecteurs
+	\item<6->$\rightarrow$ Liste ordonnée de candidats à la traduction
+	\item<6->~~
+  \end{itemize}
+  \end{column}
+  \begin{column}[r]{0.6\textwidth}
+  \only<1>{\center\includegraphics[width=\textwidth]{./graphics/context-diabete-1.pdf}\\}
+  \only<2>{\center\includegraphics[width=\textwidth]{./graphics/context-diabete-2.pdf}\\}
+  \only<3>{\center\includegraphics[width=\textwidth]{./graphics/context-diabete-3.pdf}\\}
+  \only<4>{\center\includegraphics[width=\textwidth]{./graphics/context-diabete-4.pdf}\\}
+  \only<5>{\center\includegraphics[width=\textwidth]{./graphics/context-diabete-5.pdf}\\}
+  \only<6->{\center\includegraphics[width=\textwidth]{./graphics/context-diabete-6.pdf}\\}
+  \end{column}
+  \end{columns}
+}
+
+
+  
+
+\frame{
+	\frametitle{Emphase : construction des vecteurs de contexte}
+	\begin{itemize}
+	\item Collecte de tous les élements (pertinents) dans une fenêtre donnée autour du mot à caractériser
+	\item Calcul de l'\emph{association} (indépendance statistique) entre la tête du vecteur et ses élements
+	\item<2-> Exemple : l'\emph{Information Mutuelle}
+	\item<3->{$IM = log \frac{O}{E}$}
+	\end{itemize}
+	\begin{itemize}
+	\item<4-> $\rightarrow$ Obtention d'un \emph{Motif d'Association}, pour un mot et ses voisins.
+	\end{itemize}
+}
+
+
+\begin{frame}[plain]
+\center
+\includegraphics[width=\textwidth]{./graphics/pattern.pdf}\\
+{\small \centerline{Motif d'association}}
+\end{frame}
+
+
+\begin{frame}[plain]
+\center
+\includegraphics[width=\textwidth]{./graphics/pattern-compare.pdf}\\
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\center
+\includegraphics[width=\textwidth]{./graphics/pattern-compare2.pdf}\\
+\end{frame}
+
+
+\section{Détection et exploitation de points d'ancrage}
+\frame{\tableofcontents[current]}
+\subsection{Principes}
+
+\frame{
+    \frametitle{Problème}
+	\begin{itemize}
+	\item<+-> La construction de motifs significatifs nécessite des jeux de données volumineux
+	\item<+-> Travail sur des textes spécialisés
+	\item<+->\emph{Faibles volumes de matériaux textuels}
+	\end{itemize}
+}
+
+
+\frame{
+    \frametitle{Points d'ancrage}
+    \begin{itemize}
+    \item Idée : compenser le manque de données en s'appuyant sur des \emph{éléments de confiance}
+    \item<2-> $\Rightarrow$ Points d'ancrage ! 
+    \item<3-> Conceptuellement assez proche des points d'ancrage dans les corpus parallèles
+	\begin{itemize}
+	\item<4-> Exploiter les points d'ancrage pour rendre les vecteurs de contexte plus discriminants
+	\item<4-> $\rightarrow$ rapprocher les vecteurs traductions
+	\item<4-> $\rightarrow$ éloigner les vecteurs non traductions
+	\end{itemize}
+    \end{itemize}
+
+	\begin{block}{Propriétés}<5->
+    \begin{enumerate}
+    \item<5-> Pertinents vis-à-vis des thématiques du corpus
+    \item<5-> Détectables automatiquement
+    \item<5-> Traductions stables
+    \end{enumerate}
+	\end{block}
+}
+
+\frame{
+    \frametitle{Exploitation des points d'ancrage}
+    \begin{itemize}
+    \item Idée : construire le motif d'association en priorité sur les points d'ancrage, puis sur les autres éléments
+    \item Augmentation articielle du score d'association des points d'ancrage
+	\item<+-> «~Déformation~» du motif d'association en faveur des points d'ancrage
+    \end{itemize}
+}
+
+\begin{frame}[plain]
+\center
+\includegraphics[width=\textwidth]{./graphics/pattern-vierge.pdf}\\
+\end{frame}
+
+\begin{frame}[plain]
+\center
+\includegraphics[width=\textwidth]{./graphics/pattern-highlight.pdf}\\
+\end{frame}
+
+\begin{frame}[plain]
+\center
+\includegraphics[width=\textwidth]{./graphics/pattern-shifted.pdf}\\
+\end{frame}
+
+\begin{frame}[plain]
+\center
+\includegraphics[width=\textwidth]{./graphics/pattern-compare-shifted.pdf}\\
+\end{frame}
+
+\begin{frame}[plain]
+\center
+\includegraphics[width=\textwidth]{./graphics/pattern-compare-shifted2.pdf}\\
+\end{frame}
+
+\begin{frame}[plain]
+\center
+\includegraphics[width=\textwidth]{./graphics/pattern-compare-shifted3.pdf}\\
+\end{frame}
+
+
+\subsection{Exemple de points d'ancrage}
+
+\frame{
+	\frametitle{Contexte}
+	Utilisation d'un corpus comparable anglais, japonais, français
+	\begin{itemize}
+	\item Domaine \emph{médical}
+	\item Thème \emph{Alimentation et diabète}
+	\item Registre \emph{scientifique}
+	\item Environ 250\,000 mots par partie
+	\end{itemize}
+}
+
+\frame{
+    \frametitle{Points d'ancrage (2)}
+    Deux types de points d'ancrage identifiés, respectant les propriétés :
+    \begin{itemize}
+    \item Translittérations japonaises (et leurs correspondances en français et en anglais)
+    \item Composés savants anglais/français (et leurs traductions en japonais)
+    \end{itemize}
+}
+
+\frame{
+	\frametitle{Translittérations}
+	 \begin{itemize}
+	\item Adaptation phonétique d'un mot aux contraintes du japonais
+	\item Exemple : インスリン/i-n-su-ri-n (insulin/insuline)
+	\item Facile à identifier (syllabaire dédié)
+	\item Alignement automatique sur la base de la prononciation
+	\item Couvre un vocabulaire spécifique, dans le cas des documents \emph{scientifique} (Ito, 2007)
+	\item Emprunt à l'anglais, mais alignement possible avec le français
+	\item Détectées avec un outil dédié à l'alignement anglais/japonais (Tsuji, 2005)
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Composés savants}
+	\begin{itemize}
+	\item Mots construits sur des racines grecques et latines (Namer, 2005)
+	\item<1->\emph{psychologie}, construit avec le préfixe \emph{psycho-} et le suffixe \emph{-logie}
+	\item<2->Dérivations régulières entre l'anglais et le français (Claveau, 2007)
+	\item<2->\emph{logy} (en) $\rightarrow$ \emph{logie} (fr)
+	\item<3-> Caractéristique d'un vocabulaire \emph{scientifique}
+	\item<4-> Détectés à l'aide d'une liste d'affixes
+	\end{itemize}
+}
+
+
+\subsection{Expérience -- Résultats}
+
+\frame{
+	\frametitle{Protocole}
+	Trois expériences
+	\begin{enumerate}
+	\item «~\emph{Témoin}~»
+	\item Translittérations
+	\item Composés savants
+	\end{enumerate}
+	\begin{itemize}
+	\item Points d'ancrage \emph{translittérations} : 589 (en/jp) 526 (fr/jp)
+	\item Points d'ancrage \emph{composés savants} : 604 (en/jp) 819 (fr/jp)
+	\end{itemize}
+	\begin{itemize}
+	\item Utilisation d'une liste de référence de 98 termes
+	\item Taille de fenêtre: 25
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Résultats}
+
+\begin{table}[h!t!p]
+\center
+\footnotesize
+% \begin{tabular}{l<{\onslide<1->}|c<\onslide<1->r@{,}<\onslide<1->c<{\onslide<3->}c<{\onslide<4->}c<{\onslide}c}
+\begin{tabular}{l|c<{\onslide<2->}|c<{\onslide<3->}|c<{\onslide}}
+
+ & \emph{Témoin} 	& \emph{Translittérations} & \emph{Composés Savants} \\
+\hline
+Anglais/Japonais ($Top_1$) 	& 17,1\,\%	& 20,2\,\% [+18,2\,\%]& 20,2\,\% [+18,2\,\%]\\
+Anglais/Japonais ($Top_{10}$)	& 36,3\,\%	& 39,3\,\% [+~~8,2\,\%]	& 40,4\,\% [+11,2\,\%]\\
+\hline
+Français/Japonais ($Top_1$)		& 20,4\,\%	& 20,4\,\% [+~~0,0\,\%]& 22,4\,\% [+10,0\,\%]\\
+Français/Japonais ($Top_{10}$)	& 36,7\,\%	& 37,8\,\% [+~~2,8\,\%] & 38,8\,\% [+~~5,6\,\%]\\
+\end{tabular}
+\caption{\label{resultat-1}Résultats de l'alignement anglais-japonais et français-japonais}
+\end{table}
+}
+
+\section{Conclusions}
+ 
+
+\frame{
+  \frametitle{Analyse}
+  \begin{itemize}
+  \item Effet des points d'ancrage sur les résultats de l'alignement~:
+  \begin{itemize}
+  \item $\rightarrow$ léger reclassement des candidats bien classés ($Top < 15$)
+  \item $\rightarrow$ large reclassement des candidats mal classés ($Top > 50$)
+  \end{itemize}
+  \end{itemize}
+  \begin{itemize}
+  \item Amélioration globale et significative des résultats \visible<2->{$\rightarrow$ même si améliorations $Top_1$ et $Top_{10}$ faibles}
+  \end{itemize}
+}
+
+
+
+\frame{
+  \frametitle{Conclusion, discussion}
+  \begin{itemize}
+  \item Nouvelle hypothèse pour l'alignement de lexique à partir de corpus comparables spécialisés
+  \item Résultats globalement significatifs
+  \item Hypothèse extensible à d'autres types de vocabulaire
+  \end{itemize}
+  \begin{itemize}
+  \item<2-> Expérience à reproduire avec d'autres points d'ancrage
+  \item<2-> À définir en fonction des couples de langues impliquées
+  \item<2-> Utilisation d'autres techniques transversales en TALN
+  \item<2-> (détection des cognats, techniques de RI\ldots)
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Fin}
+  \center
+  Merci de votre attention
+}
+
+\frame{
+  \frametitle{Prise en compte des points d'ancrage}
+  \begin{equation}
+  {assoc_{(PA)}}_a^v = assoc_a^v + \beta
+  \end{equation}
+
+}
+
+\frame{
+  \frametitle{Influence des points d'ancrage}
+  \begin{columns}
+  \begin{column}[l]{0,5\textwidth}
+  \includegraphics[width=\textwidth]{./graphics/graphe-b.pdf}
+  \end{column}
+  \begin{column}[r]{0,5\textwidth}
+  \includegraphics[width=\textwidth]{./graphics/graphe-c.pdf}
+  \end{column}
+  \end{columns}
+}
+
+
+
+\end{document}
